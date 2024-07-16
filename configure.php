@@ -268,7 +268,7 @@ $useUpdateChangelogWorkflow = confirm('Use automatic changelog updater workflow?
 
 writeln('------');
 writeln("Author     : {$authorName} ({$authorUsername}, {$authorEmail})");
-writeln("Vendor     : Hexafuchs (hexafuchs)");
+writeln('Vendor     : Hexafuchs (hexafuchs)');
 writeln("Package    : {$packageSlug} <{$description}>");
 writeln("Namespace  : Hexafuchs\\{$className}");
 writeln("Class name : {$className}");

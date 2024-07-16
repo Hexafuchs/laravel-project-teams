@@ -2,6 +2,4 @@
 
 namespace Hexafuchs\Skeleton;
 
-class Skeleton
-{
-}
+class Skeleton {}

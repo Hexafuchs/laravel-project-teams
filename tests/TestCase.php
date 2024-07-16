@@ -2,9 +2,9 @@
 
 namespace Hexafuchs\Skeleton\Tests;
 
+use Hexafuchs\Skeleton\PackageServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Hexafuchs\Skeleton\PackageServiceProvider;
 
 class TestCase extends Orchestra
 {

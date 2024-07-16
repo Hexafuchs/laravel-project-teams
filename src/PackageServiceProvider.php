@@ -2,9 +2,9 @@
 
 namespace Hexafuchs\Skeleton;
 
+use Hexafuchs\Skeleton\Commands\SkeletonCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider as ServiceProvider;
-use Hexafuchs\Skeleton\Commands\SkeletonCommand;
 
 class PackageServiceProvider extends ServiceProvider
 {
