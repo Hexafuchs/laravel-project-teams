@@ -1,8 +1,8 @@
 <?php
 
-namespace Hexafuchs\Skeleton\Tests;
+namespace Hexafuchs\Team\Tests;
 
-use Hexafuchs\Skeleton\PackageServiceProvider;
+use Hexafuchs\Team\PackageServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Hexafuchs\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Hexafuchs\\Team\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
@@ -29,7 +29,7 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_laravel-project-teams_table.php.stub';
         $migration->up();
         */
     }

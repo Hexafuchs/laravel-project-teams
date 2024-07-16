@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexafuchs\Skeleton\Database\Factories;
+namespace Hexafuchs\Team\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

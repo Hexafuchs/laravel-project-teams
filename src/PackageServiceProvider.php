@@ -1,8 +1,8 @@
 <?php
 
-namespace Hexafuchs\Skeleton;
+namespace Hexafuchs\Team;
 
-use Hexafuchs\Skeleton\Commands\SkeletonCommand;
+use Hexafuchs\Team\Commands\TeamCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider as ServiceProvider;
 
@@ -16,10 +16,10 @@ class PackageServiceProvider extends ServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('laravel-project-teams')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_skeleton_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_laravel_project_teams_table')
+            ->hasCommand(TeamCommand::class);
     }
 }

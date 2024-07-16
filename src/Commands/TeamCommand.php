@@ -1,12 +1,12 @@
 <?php
 
-namespace Hexafuchs\Skeleton\Commands;
+namespace Hexafuchs\Team\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class TeamCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-project-teams';
 
     public $description = 'My command';
 

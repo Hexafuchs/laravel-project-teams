@@ -1,17 +1,17 @@
 {
-    "name": "hexafuchs/:package_slug",
-    "description": ":package_description",
+    "name": "hexafuchs/laravel-project-teams",
+    "description": "Provide access to your application on a per-team basis",
     "keywords": [
         "Hexafuchs",
         "laravel",
-        ":package_slug"
+        "laravel-project-teams"
     ],
-    "homepage": "https://github.com/hexafuchs/:package_slug",
+    "homepage": "https://github.com/hexafuchs/laravel-project-teams",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Leo",
+            "email": "leo@hexafuchs.de",
             "role": "Developer"
         }
     ],
@@ -35,19 +35,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Hexafuchs\\Skeleton\\": "src/",
-            "Hexafuchs\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Hexafuchs\\Team\\": "src/",
+            "Hexafuchs\\Team\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Hexafuchs\\Skeleton\\Tests\\": "tests/",
+            "Hexafuchs\\Team\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-project-teams --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
@@ -73,10 +73,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Hexafuchs\\Skeleton\\PackageServiceProvider"
+                "Hexafuchs\\Team\\PackageServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Hexafuchs\\Skeleton\\Facades\\Skeleton"
+                "Team": "Hexafuchs\\Team\\Facades\\Team"
             }
         }
     },
