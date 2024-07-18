@@ -18,20 +18,14 @@ composer require hexafuchs/laravel-project-teams
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-project-teams-migrations"
+php artisan vendor:publish --tag="project-teams-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-project-teams-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-project-teams-views"
+php artisan vendor:publish --tag="project-teams-config"
 ```
 
 ## Usage
@@ -46,6 +40,30 @@ echo $team->echoPhrase('Hello, Hexafuchs!');
 ```bash
 composer test
 ```
+
+## Development
+
+Start setting up workbench if it is not already available under `/workbench`. The more you publish the better. Choose 
+the `.env` file.
+
+```bash
+php vendor/bin/testbench workbench:install
+```
+
+Publish all required resources. (Remember to republish the resources if you change them.)
+
+```bash
+php vendor/bin/testbench vendor:publish --tag="project-teams-config"
+php vendor/bin/testbench vendor:publish --tag="project-teams-migrations"
+```
+
+Let's migrate.
+
+```bash
+php vendor/bin/testbench migrate
+```
+
+If you wanna execute some command, call `php vendor/bin/testbench` instead of the typical `php artisan`.
 
 ## Changelog
 
