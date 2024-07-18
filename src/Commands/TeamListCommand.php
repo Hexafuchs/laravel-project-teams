@@ -14,6 +14,11 @@ class TeamListCommand extends Command
     {
         $teams = call_user_func([config('teams.models.team'), 'all']);
 
+        if (sizeof($teams) === 0) {
+            $this->error('No teams found');
+            return self::FAILURE;
+        }
+
         foreach ($teams as $team) {
             $this->comment('--------------------------');
             $this->comment('Team ' . $team['id']);

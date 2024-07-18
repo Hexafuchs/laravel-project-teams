@@ -8,7 +8,9 @@ use function Laravel\Prompts\search;
 
 class TeamRemoveCommand extends Command
 {
-    public $signature = 'teams:remove {id? : team id to remove}';
+    public $signature = 'teams:remove
+                            {id? : team id to remove}
+                            {--fallback : Use the fallback implementation for the interactive search}';
 
     public $description = 'Delete an existing team';
 
@@ -18,6 +20,8 @@ class TeamRemoveCommand extends Command
     public function askForTeam(): string
     {
         $teams = call_user_func([config('teams.models.team'), 'all'])->toArray();
+
+        \Laravel\Prompts\Prompt::fallbackWhen($this->option('fallback'));
 
         $label = search(
             label: "Which team would you like to delete?",
@@ -35,9 +39,7 @@ class TeamRemoveCommand extends Command
 
     public function handle(): int
     {
-        $teamId = $this->argument('id') ?
-            $this->argument('id') :
-            $this->askForTeam();
+        $teamId = $this->argument('id') ?? $this->askForTeam();
 
         $team = call_user_func([config('teams.models.team'), 'find'], $teamId);
 
