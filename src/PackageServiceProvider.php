@@ -2,7 +2,9 @@
 
 namespace Hexafuchs\Team;
 
-use Hexafuchs\Team\Commands\TeamCommand;
+use Hexafuchs\Team\Commands\TeamCreateCommand;
+use Hexafuchs\Team\Commands\TeamListCommand;
+use Hexafuchs\Team\Commands\TeamRemoveCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider as ServiceProvider;
 
@@ -17,9 +19,9 @@ class PackageServiceProvider extends ServiceProvider
          */
         $package
             ->name('laravel-project-teams')
-            ->hasConfigFile()
+            ->hasConfigFile('teams')
             ->hasViews()
-            ->hasMigration('create_laravel_project_teams_table')
-            ->hasCommand(TeamCommand::class);
+            ->hasMigration('create_teams_table')
+            ->hasCommands([TeamCreateCommand::class, TeamListCommand::class, TeamRemoveCommand::class]);
     }
 }
