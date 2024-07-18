@@ -8,10 +8,13 @@ use function Laravel\Prompts\search;
 
 class TeamRemoveCommand extends Command
 {
-    public $signature = 'teams:remove {id?}';
+    public $signature = 'teams:remove {id? : team id to remove}';
 
     public $description = 'Delete an existing team';
 
+    /**
+     * Returns the chosen team id of an interactive query.
+     */
     public function askForTeam(): string
     {
         $teams = call_user_func([config('teams.models.team'), 'all'])->toArray();
@@ -35,11 +38,6 @@ class TeamRemoveCommand extends Command
         $teamId = $this->argument('id') ?
             $this->argument('id') :
             $this->askForTeam();
-
-        if (empty($teamId)) {
-            $this->error('No team selected');
-            return self::FAILURE;
-        }
 
         $team = call_user_func([config('teams.models.team'), 'find'], $teamId);
 

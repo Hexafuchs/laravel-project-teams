@@ -22,6 +22,10 @@ php artisan vendor:publish --tag="project-teams-migrations"
 php artisan migrate
 ```
 
+> [!NOTE]
+> If you like, you can make the team names unique. Just add the unique directive to the name column in the migration. 
+> You can also add this later, just create a new migration and add the unique condition to the name column.  
+
 You can publish the config file with:
 
 ```bash
@@ -30,9 +34,86 @@ php artisan vendor:publish --tag="project-teams-config"
 
 ## Usage
 
+### Getting started
+
+Add the team member trait to your user class, e.g.:
+
+`app\Models\User.php`
 ```php
-$team = new Hexafuchs\Team();
-echo $team->echoPhrase('Hello, Hexafuchs!');
+use Hexafuchs\Team\Traits\TeamMember;
+
+class User extends Authenticatable
+{
+    use ..., TeamMember;
+}
+```
+
+Make sure you published the configuration. Then go into the configuration and update the model class, e.g.:
+
+`config/teams.php`
+```php
+return [
+    'models' => [
+        'user' => \App\Models\User::class,
+    ]
+];
+
+```
+
+### Adding an owned model
+
+To add a model to be owned by your team, add the Ownable trait to it, e.g.:
+
+`app\Models\SomeItem.php`
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Hexafuchs\Team\Traits\Ownable;
+
+class SomeItem extends Model {
+    use Ownable;
+}
+```
+
+### Adding a relation for owned models
+
+If you wanna create a new relation that can be called from the Team model, you should first extend the team model in 
+your project, e.g.:
+
+`app\Models\Team.php`
+```php
+<?php
+
+namespace App\Models;
+
+use Hexafuchs\Team\Team as Model;
+
+class Team extends Model {
+
+}
+```
+
+Update the config file to use your newly created model, e.g.:
+```php
+return [
+    'models' => [
+        'team' => \App\Models\Team::class,
+    ]
+];
+
+```
+
+Now add your relation, e.g.:
+```php
+class Team extends Model {
+    public function ownedItems(): MorphToMany
+    {
+        return $this->morphedByMany(\App\Models\SomeItem, 'ownable');
+    }
+}
 ```
 
 ## Testing

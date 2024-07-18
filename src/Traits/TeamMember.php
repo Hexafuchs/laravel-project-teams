@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 trait TeamMember
 {
     /**
-     * Defines the relationship between teams and their members.
+     * Returns all teams the user is member of (or the corresponding relation).
+     *
+     * The user must be an instance of `\Illuminate\Foundation\Auth\User` (if you use the default template, you will
+     * find this to be aliased as `Authenticatable` in the default user class).
+     *
+     * You can configure the team model using `teams.models.team`.
      */
     public function teams(): BelongsToMany
     {

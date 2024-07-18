@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 trait Ownable
 {
     /**
-     * Defines the morphed relationship between teams and their items.
+     * Returns all teams that "own" this instance (or the corresponding relation).
      */
     public function owners(): MorphToMany
     {

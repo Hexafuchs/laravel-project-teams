@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class TeamCreateCommand extends Command
 {
-    public $signature = 'teams:create {name?}';
+    public $signature = 'teams:create {name? : name of the new team}';
 
     public $description = 'Create a new team';
 
