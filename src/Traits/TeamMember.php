@@ -21,4 +21,13 @@ trait TeamMember
         assert($this instanceof User);
         return $this->belongsToMany(config('teams.models.team'));
     }
+
+    /**
+     * Check if this instance is member of a given team.
+     */
+    public function isMemberOf(Team $team): bool
+    {
+        assert($this instanceof User);
+        return $this->teams()->where('id', $team['id'])->exists();
+    }
 }
