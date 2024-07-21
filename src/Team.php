@@ -21,6 +21,14 @@ class Team extends Model {
      */
     public function members(): BelongsToMany
     {
-        return $this->belongsToMany(config('teams.model.user'));
+        return $this->belongsToMany(config('teams.models.user'));
+    }
+
+    public function owns(Model $model): bool
+    {
+        if (method_exists($model, 'isOwnedBy')) {
+            return $model->isOwnedBy($this);
+        }
+        return false;
     }
 }
