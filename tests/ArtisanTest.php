@@ -11,14 +11,13 @@ it('can create a team', function () {
         'name' => $name,
     ]);
 
-    $this->artisan('teams:create "' . $name . '"')
+    $this->artisan('teams:create "'.$name.'"')
         ->assertSuccessful();
 
     $this->assertDatabaseHas('teams', [
         'name' => $name,
     ]);
 });
-
 
 it('can create a team interactively', function () {
     $name = fake()->company();
@@ -35,8 +34,6 @@ it('can create a team interactively', function () {
     ]);
 });
 
-
-
 it('can delete a team', function () {
     $name = fake()->company();
     $team = Team::create(['name' => $name]);
@@ -45,8 +42,8 @@ it('can delete a team', function () {
         'name' => $name,
     ]);
 
-    $this->artisan('teams:remove ' . $team->id)
-        ->expectsConfirmation("Are you sure you want to delete the team " . $team['name'] . " with id " . $team['id'] . "?", 'yes')
+    $this->artisan('teams:remove '.$team->id)
+        ->expectsConfirmation('Are you sure you want to delete the team '.$team['name'].' with id '.$team['id'].'?', 'yes')
         ->assertSuccessful();
 
     $this->assertDatabaseMissing('teams', [
@@ -71,16 +68,15 @@ it('can delete a team interactively', function () {
     ]);
 
     $this->artisan('teams:remove')
-        ->expectsQuestion('Which team would you like to delete?', $team['id'] . ': ' . $team['name'])
-        ->expectsChoice('Which team would you like to delete?', $team['id'] . ': ' . $team['name'], [$team['id'] . ': ' . $team['name']])
-        ->expectsConfirmation("Are you sure you want to delete the team " . $team['name'] . " with id " . $team['id'] . "?", 'yes')
+        ->expectsQuestion('Which team would you like to delete?', $team['id'].': '.$team['name'])
+        ->expectsChoice('Which team would you like to delete?', $team['id'].': '.$team['name'], [$team['id'].': '.$team['name']])
+        ->expectsConfirmation('Are you sure you want to delete the team '.$team['name'].' with id '.$team['id'].'?', 'yes')
         ->assertSuccessful();
 
     $this->assertDatabaseMissing('teams', [
         'name' => $name,
     ]);
 });
-
 
 it('can delete a team in the fallback', function () {
     $name = fake()->company();
@@ -93,7 +89,7 @@ it('can delete a team in the fallback', function () {
     $this->artisan('teams:remove --fallback')
         ->expectsQuestion('Which team would you like to delete?', $team['id'])
         ->expectsQuestion('Which team would you like to delete?', $team['id'])
-        ->expectsConfirmation("Are you sure you want to delete the team " . $team['name'] . " with id " . $team['id'] . "?", 'yes')
+        ->expectsConfirmation('Are you sure you want to delete the team '.$team['name'].' with id '.$team['id'].'?', 'yes')
         ->assertSuccessful();
 
     $this->assertDatabaseMissing('teams', [
@@ -109,8 +105,8 @@ it('can abort deleting a team', function () {
         'name' => $name,
     ]);
 
-    $this->artisan('teams:remove ' . $team->id)
-        ->expectsConfirmation("Are you sure you want to delete the team " . $team['name'] . " with id " . $team['id'] . "?", 'no')
+    $this->artisan('teams:remove '.$team->id)
+        ->expectsConfirmation('Are you sure you want to delete the team '.$team['name'].' with id '.$team['id'].'?', 'no')
         ->assertFailed();
 
     $this->assertDatabaseHas('teams', [
@@ -134,11 +130,11 @@ it('can list all teams', function () {
 
     $this->artisan('teams:list')
         ->expectsOutput('--------------------------')
-        ->expectsOutput('Team ' . $team['id'])
-        ->expectsOutput('Name: ' . $team['name'])
+        ->expectsOutput('Team '.$team['id'])
+        ->expectsOutput('Name: '.$team['name'])
         ->expectsOutput('--------------------------')
-        ->expectsOutput('Team ' . $teamTwo['id'])
-        ->expectsOutput('Name: ' . $teamTwo['name'])
+        ->expectsOutput('Team '.$teamTwo['id'])
+        ->expectsOutput('Name: '.$teamTwo['name'])
         ->expectsOutput('--------------------------')
         ->assertSuccessful();
 });

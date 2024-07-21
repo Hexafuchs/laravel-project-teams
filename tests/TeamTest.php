@@ -66,4 +66,3 @@ it('can remove member from team', function () {
 
     expect($team->members)->toHaveCount(0);
 });
-

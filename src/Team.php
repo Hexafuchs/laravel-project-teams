@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User;
 
-class Team extends Model {
-
+class Team extends Model
+{
     /**
      * Variables that can me mass assigned (e.g. using the `::create` function).
      */
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     /**
@@ -36,7 +36,7 @@ class Team extends Model {
         $hasTrait = in_array(TeamMember::class, class_uses_recursive($user));
         $isChild = is_a($user, config('teams.models.user'));
 
-        if (!app()->environment('production')) {
+        if (! app()->environment('production')) {
             assert($hasTrait);
             assert($isChild);
         }
@@ -63,9 +63,8 @@ class Team extends Model {
      * The model needs to have the `Hexafuchs\Team\Traits\TeamMember` trait and have the class configured in
      * `teams.models.user` in the hierarchy.
      *
-     * @param User $user target team member
-     * @param bool $autoRefresh refresh this and the team member model afterwards, false by default
-     * @return void
+     * @param  User  $user  target team member
+     * @param  bool  $autoRefresh  refresh this and the team member model afterwards, false by default
      */
     public function removeMember(User $user, bool $autoRefresh = false): void
     {
@@ -85,9 +84,10 @@ class Team extends Model {
     protected function isOwnableObject(Model $model): bool
     {
         $hasTrait = in_array(Ownable::class, class_uses_recursive($model));
-        if (!app()->environment('production')) {
+        if (! app()->environment('production')) {
             assert($hasTrait);
         }
+
         return $hasTrait;
     }
 
@@ -100,8 +100,10 @@ class Team extends Model {
     {
         if ($this->isOwnableObject($model)) {
             assert(method_exists($model, 'isOwnedBy'));
+
             return $model->isOwnedBy($this);
         }
+
         return false;
     }
 }

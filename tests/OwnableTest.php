@@ -2,7 +2,6 @@ PackageTest.php<?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Hash;
 
 uses(RefreshDatabase::class);
 

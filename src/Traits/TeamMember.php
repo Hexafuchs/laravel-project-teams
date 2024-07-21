@@ -3,8 +3,8 @@
 namespace Hexafuchs\Team\Traits;
 
 use Hexafuchs\Team\Team;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User;
 
 trait TeamMember
 {
@@ -19,6 +19,7 @@ trait TeamMember
     public function teams(): BelongsToMany
     {
         assert($this instanceof User);
+
         return $this->belongsToMany(config('teams.models.team'));
     }
 
@@ -33,6 +34,7 @@ trait TeamMember
     public function isMemberOf(Team $team): bool
     {
         assert($this instanceof User);
+
         return $this->teams()->where('id', $team['id'])->exists();
     }
 
@@ -44,7 +46,8 @@ trait TeamMember
      *
      * You can configure the team model using `teams.models.team`, but it must inherit from `Hexafuchs\Team\Team`.
      */
-    public function addToTeam(Team $team): void {
+    public function addToTeam(Team $team): void
+    {
         $team->addMember($this);
     }
 
@@ -56,11 +59,11 @@ trait TeamMember
      *
      * You can configure the team model using `teams.models.team`, but it must inherit from `Hexafuchs\Team\Team`.
      *
-     * @param Team $team target team
-     * @param bool $autoRefresh refresh this and the team model afterwards, false by default
-     * @return void
+     * @param  Team  $team  target team
+     * @param  bool  $autoRefresh  refresh this and the team model afterwards, false by default
      */
-    public function removeFromTeam(Team $team, bool $autoRefresh = false): void {
+    public function removeFromTeam(Team $team, bool $autoRefresh = false): void
+    {
         if ($this->isMemberOf($team)) {
             $team->removeMember($this, $autoRefresh);
         }

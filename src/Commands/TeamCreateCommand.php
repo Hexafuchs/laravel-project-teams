@@ -14,9 +14,9 @@ class TeamCreateCommand extends Command
     {
         $name = $this->argument('name') ?? $this->ask('What is the name of the team you want to create?');
 
-        $team = call_user_func([config('teams.models.team'), 'create'], [ 'name' => $name ]);
+        $team = call_user_func([config('teams.models.team'), 'create'], ['name' => $name]);
 
-        $this->comment('Team ' . $team['name'] . ' created successfully with id ' . $team['id']);
+        $this->comment('Team '.$team['name'].' created successfully with id '.$team['id']);
 
         return self::SUCCESS;
     }

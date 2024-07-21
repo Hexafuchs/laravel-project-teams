@@ -24,6 +24,6 @@ return [
         |
         */
         'user' => \Illuminate\Foundation\Auth\User::class,
-    ]
+    ],
 
 ];

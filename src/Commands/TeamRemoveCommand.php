@@ -3,6 +3,7 @@
 namespace Hexafuchs\Team\Commands;
 
 use Illuminate\Console\Command;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\search;
 
@@ -24,9 +25,9 @@ class TeamRemoveCommand extends Command
         \Laravel\Prompts\Prompt::fallbackWhen($this->option('fallback'));
 
         $label = search(
-            label: "Which team would you like to delete?",
+            label: 'Which team would you like to delete?',
             options: fn ($search) => array_values(array_filter(
-                array_map(fn ($team) => $team['id'] . ': ' . $team['name'], $teams),
+                array_map(fn ($team) => $team['id'].': '.$team['name'], $teams),
                 fn ($choice) => str_contains(strtolower($choice), strtolower($search))
             )),
             placeholder: 'Search...',
@@ -45,15 +46,16 @@ class TeamRemoveCommand extends Command
 
         if (empty($team)) {
             $this->error('Team not found');
+
             return self::FAILURE;
         }
 
-        if (!confirm(
-            "Are you sure you want to delete the team " . $team['name'] . " with id " . $team['id'] . "?",
+        if (! confirm(
+            'Are you sure you want to delete the team '.$team['name'].' with id '.$team['id'].'?',
             default: false
         )) {
             return self::FAILURE;
-        };
+        }
 
         $team->delete();
 

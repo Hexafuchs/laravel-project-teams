@@ -14,6 +14,7 @@ trait Ownable
     public function owners(): MorphToMany
     {
         assert($this instanceof Model);
+
         return $this->morphToMany(config('teams.models.team'), 'ownable');
     }
 
@@ -28,9 +29,8 @@ trait Ownable
     /**
      * Remove the team as a (co-)owner of this instance
      *
-     * @param Team $team target team
-     * @param bool $autoRefresh refresh this and the team model afterwards, false by default
-     * @return void
+     * @param  Team  $team  target team
+     * @param  bool  $autoRefresh  refresh this and the team model afterwards, false by default
      */
     public function removeTeam(Team $team, bool $autoRefresh = false): void
     {

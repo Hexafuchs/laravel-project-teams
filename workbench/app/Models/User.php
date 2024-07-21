@@ -2,8 +2,8 @@
 
 namespace Workbench\App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hexafuchs\Team\Traits\TeamMember;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
