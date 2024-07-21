@@ -46,7 +46,7 @@ it('can remove teams to ownables', function () {
     expect($item->owners)->toHaveCount(0);
 });
 
-it('can can check if ownable belongs to team', function () {
+it('can check if ownable belongs to team', function () {
     $team = \Workbench\App\Models\Team::create(['name' => 'Team 1']);
     $teamTwo = \Workbench\App\Models\Team::create(['name' => 'Team 2']);
 
@@ -57,7 +57,7 @@ it('can can check if ownable belongs to team', function () {
         ->and($item->isOwnedBy($teamTwo))->toBeFalse();
 });
 
-it('can can check if team owns ownable', function () {
+it('can check if team owns ownable', function () {
     $team = \Workbench\App\Models\Team::create(['name' => 'Team 1']);
     $teamTwo = \Workbench\App\Models\Team::create(['name' => 'Team 2']);
 
@@ -66,4 +66,11 @@ it('can can check if team owns ownable', function () {
 
     expect($team->owns($item))->toBeTrue()
         ->and($teamTwo->owns($item))->toBeFalse();
+});
+
+it('cannot check if team owns non-ownable', function () {
+    $team = \Workbench\App\Models\Team::create(['name' => 'Team 1']);
+    $teamTwo = \Workbench\App\Models\Team::create(['name' => 'Team 2']);
+
+    expect($team->owns($teamTwo))->toBeFalse();
 });
