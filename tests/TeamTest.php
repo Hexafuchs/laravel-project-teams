@@ -56,13 +56,13 @@ it('can remove member from team', function () {
         ->toHaveCount(2)
         ->toContain($user->id, $userTwo->id);
 
-    $team->removeMember($user);
+    $team->removeMember($user, true);
 
     expect($team->members->pluck('id'))
         ->toHaveCount(1)
         ->toContain($userTwo->id);
 
-    $team->removeMember($userTwo);
+    $team->removeMember($userTwo, true);
 
     expect($team->members)->toHaveCount(0);
 });
