@@ -33,4 +33,9 @@ class TestCase extends Orchestra
         $migration->up();
         */
     }
+
+    public function listAllTables()
+    {
+        dump(\Illuminate\Support\Facades\DB::select("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"));
+    }
 }
