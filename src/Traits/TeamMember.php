@@ -2,6 +2,7 @@
 
 namespace Hexafuchs\Team\Traits;
 
+use Hexafuchs\Team\Team;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
