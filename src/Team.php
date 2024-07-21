@@ -24,6 +24,12 @@ class Team extends Model {
         return $this->belongsToMany(config('teams.models.user'));
     }
 
+    /**
+     * Checks if this team is a (co-)owner of the given model.
+     *
+     * The model must be an ownable (or at least implement `isOwnedBy` with a team as first and only required
+     * parameter), else `false` is returned.
+     */
     public function owns(Model $model): bool
     {
         if (method_exists($model, 'isOwnedBy')) {
