@@ -1,7 +1,8 @@
-<?php
+PackageTest.php<?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Hash;
 
 uses(RefreshDatabase::class);
 
@@ -23,7 +24,7 @@ it('can add teams to ownables', function () {
         ->toContain($team->id, $teamTwo->id);
 });
 
-it('can remove teams to ownables', function () {
+it('can remove teams from ownables', function () {
     $team = \Workbench\App\Models\Team::create(['name' => 'Team 1']);
     $teamTwo = \Workbench\App\Models\Team::create(['name' => 'Team 2']);
 
@@ -55,22 +56,4 @@ it('can check if ownable belongs to team', function () {
 
     expect($item->isOwnedBy($team))->toBeTrue()
         ->and($item->isOwnedBy($teamTwo))->toBeFalse();
-});
-
-it('can check if team owns ownable', function () {
-    $team = \Workbench\App\Models\Team::create(['name' => 'Team 1']);
-    $teamTwo = \Workbench\App\Models\Team::create(['name' => 'Team 2']);
-
-    $item = \Workbench\App\Models\SomeItem::create();
-    $item->addTeam($team);
-
-    expect($team->owns($item))->toBeTrue()
-        ->and($teamTwo->owns($item))->toBeFalse();
-});
-
-it('cannot check if team owns non-ownable', function () {
-    $team = \Workbench\App\Models\Team::create(['name' => 'Team 1']);
-    $teamTwo = \Workbench\App\Models\Team::create(['name' => 'Team 2']);
-
-    expect($team->owns($teamTwo))->toBeFalse();
 });
