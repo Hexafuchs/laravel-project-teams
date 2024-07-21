@@ -36,13 +36,13 @@ it('can remove teams from ownables', function () {
         ->toHaveCount(2)
         ->toContain($team->id, $teamTwo->id);
 
-    $item->removeTeam($team);
+    $item->removeTeam($team, true);
 
     expect($item->owners->pluck('id'))
         ->toHaveCount(1)
         ->toContain($teamTwo->id);
 
-    $item->removeTeam($teamTwo);
+    $item->removeTeam($teamTwo, true);
 
     expect($item->owners)->toHaveCount(0);
 });

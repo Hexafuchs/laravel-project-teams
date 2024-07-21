@@ -62,12 +62,20 @@ class Team extends Model {
      *
      * The model needs to have the `Hexafuchs\Team\Traits\TeamMember` trait and have the class configured in
      * `teams.models.user` in the hierarchy.
+     *
+     * @param User $user target team member
+     * @param bool $autoRefresh refresh this and the team member model afterwards, false by default
+     * @return void
      */
-    public function removeMember(User $user)
+    public function removeMember(User $user, bool $autoRefresh = false): void
     {
         if ($this->isTeamMemberObject($user)) {
             $this->members()->detach($user);
-            $this->refresh();
+
+            if ($autoRefresh) {
+                $this->refresh();
+                $user->refresh();
+            }
         }
     }
 
