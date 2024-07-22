@@ -4,6 +4,7 @@ namespace Hexafuchs\Team\Tests;
 
 use Hexafuchs\Team\PackageServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Filesystem\Filesystem;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -28,10 +29,25 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-project-teams_table.php.stub';
-        $migration->up();
-        */
+        $this->backwardCompatibleDatabase();
+    }
+
+    /**
+     * RefreshDatabase, loadMigrationsFrom and In-Memory Database dont work together before this pull request
+     * https://github.com/laravel/framework/pull/47912 was merged. This function replaces the in-memory database with
+     * a local one in the workbench directory.
+     *
+     * @return void
+     */
+    public function backwardCompatibleDatabase()
+    {
+        $db = 'workbench/.testing.db';
+        $filesystem = new Filesystem();
+        config()->set('database.connections.testing.database', $db);
+
+        if ($filesystem->missing($db)) {
+            $filesystem->put($db, "");
+        }
     }
 
     public function listAllTables()
