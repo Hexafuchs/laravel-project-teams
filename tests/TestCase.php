@@ -46,7 +46,7 @@ class TestCase extends Orchestra
         config()->set('database.connections.testing.database', $db);
 
         if ($filesystem->missing($db)) {
-            $filesystem->put($db, "");
+            $filesystem->put($db, '');
         }
     }
 
