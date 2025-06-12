@@ -1,3 +1,6 @@
+# Moved to https://codeberg.org/Hexafuchs/laravel-project-teams
+
+
 # Provide access to your application on a per-team basis
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hexafuchs/laravel-project-teams.svg?style=flat-square)](https://packagist.org/packages/hexafuchs/laravel-project-teams)
